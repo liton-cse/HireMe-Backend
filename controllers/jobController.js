@@ -186,9 +186,9 @@ const getJobApplications = async (req, res) => {
       return res.status(404).json({ message: "Job not found" });
     }
 
-    // Check if the user is the owner of the job
+    // Check if the user is the owner of the job or admin
     if (
-      job.company.toString() !== req.user._id.toString() &&
+      job.createdBy.toString() !== req.user._id.toString() &&
       req.user.role !== "admin"
     ) {
       return res.status(401).json({ message: "Not authorized" });
